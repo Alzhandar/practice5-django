@@ -6,9 +6,19 @@
 </head>
 <body>
     <h1>Список расходов</h1>
+    <form method="get">
+        {{ form.as_p }}
+        <button type="submit">Фильтровать</button>
+    </form>
+    <a href="{% url 'add_category' %}">Добавить категорию</a>
+    <a href="{% url 'add_expense' %}">Добавить новый расход</a>
     <ul>
         {% for expense in expenses %}
-            <li>{{ expense.date }}: {{ expense.description }} - {{ expense.amount }}</li>
+            <li>
+                {{ expense.date }}: {{ expense.description }} - {{ expense.amount }}
+                <a href="{% url 'edit_expense' expense.pk %}">Редактировать</a>
+                <a href="{% url 'delete_expense' expense.pk %}">Удалить</a>
+            </li>
         {% endfor %}
     </ul>
 </body>
